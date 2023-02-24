@@ -46,7 +46,11 @@ DJANGO_APPS = [
 ]
 THIRD_PARTY_APPS = []
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    "storefront.users.apps.UsersConfig",
+    "storefront.store.apps.StoreConfig",
+    "storefront.tags.apps.TagsConfig",
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
