@@ -3,3 +3,12 @@
 # Django
 # ------------------------------------------------------------------------------
 django-debug-toolbar==3.8.1
+django-coverage-plugin==1.8.0  # https://github.com/nedbat/django_coverage_plugin
+pytest-django==3.10.0  # https://github.com/pytest-dev/pytest-django
+
+# Testing
+# ------------------------------------------------------------------------------
+pytest==7.21  # https://github.com/pytest-dev/pytest
+pytest-sugar==0.9.6  # https://github.com/Frozenball/pytest-suga
+pytest-cov==4.0.0
+factory_boy==3.2.1
