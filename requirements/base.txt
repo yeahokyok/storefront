@@ -2,3 +2,5 @@
 # ------------------------------------------------------------------------------
 django==3.2.18  # https://www.djangoproject.com/
 django-environ==0.9.0  # https://github.com/joke2k/django-environ
+
+psycopg2==2.9.5

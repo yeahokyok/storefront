@@ -47,7 +47,6 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = []
 
 LOCAL_APPS = [
-    "storefront.users.apps.UsersConfig",
     "storefront.store.apps.StoreConfig",
     "storefront.tags.apps.TagsConfig",
 ]
@@ -90,15 +89,22 @@ ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+# DATABASES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    # Raises ImproperlyConfigured Exception
+    # if DATABASE_URL Not in os.environ and
+    # the "default" argument is not defined.
+    # The DATABASE_URL environment variables
+    # expect a value in the following format:
+    # DATABASE_URL=postgres://user:password@hostname_or_ip:port/database_name
+    "default": env.db(
+        "DATABASE_URL",
+        default="postgres:///storefront",
+    )
 }
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
 # Password validation
