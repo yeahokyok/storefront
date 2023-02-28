@@ -87,3 +87,19 @@ class Address(models.Model):
 
     def __str__(self):
         return f"{self.street}, {self.city} of {self.customer}"
+
+
+class Cart(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Cart {self.id}"
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    quantity = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return f"{self.quantity} of {self.product} in cart {self.cart}"

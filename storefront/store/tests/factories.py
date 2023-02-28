@@ -1,6 +1,16 @@
 import factory
 
-from ..models import Product, Promotion, Collection, Customer, Order, OrderItem, Address
+from ..models import (
+    Product,
+    Promotion,
+    Collection,
+    Customer,
+    Order,
+    OrderItem,
+    Address,
+    Cart,
+    CartItem,
+)
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -69,3 +79,19 @@ class AddressFactory(factory.django.DjangoModelFactory):
     customer = factory.SubFactory(CustomerFactory)
     street = factory.Faker("street_address")
     city = factory.Faker("city")
+
+
+class CartFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Cart
+
+    created_at = factory.Faker("date_time_this_year")
+
+
+class CartItemFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = CartItem
+
+    cart = factory.SubFactory(CartFactory)
+    product = factory.SubFactory(ProductFactory)
+    quantity = factory.Faker("pyint", min_value=1, max_value=10)
