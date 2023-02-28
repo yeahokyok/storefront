@@ -1,6 +1,6 @@
 import factory
 
-from ..models import Product, Promotion, Collection, Customer, Order
+from ..models import Product, Promotion, Collection, Customer, Order, OrderItem
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -48,3 +48,15 @@ class OrderFactory(factory.django.DjangoModelFactory):
     customer = factory.SubFactory(CustomerFactory)
     placed_at = factory.Faker("date_time_this_year")
     payment_status = factory.Faker("random_element", elements=("P", "C", "F"))
+
+
+class OrderItemFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = OrderItem
+
+    order = factory.SubFactory(OrderFactory)
+    product = factory.SubFactory(ProductFactory)
+    quantity = factory.Faker("pyint", min_value=1, max_value=10)
+    unit_price = factory.Faker(
+        "pydecimal", left_digits=2, right_digits=2, positive=True
+    )
