@@ -1,6 +1,6 @@
 import factory
 
-from ..models import Product, Promotion
+from ..models import Product, Promotion, Collection
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -20,3 +20,11 @@ class PromotionFactory(factory.django.DjangoModelFactory):
 
     description = factory.Faker("text", max_nb_chars=200)
     discount = factory.Faker("pydecimal", left_digits=2, right_digits=2, positive=True)
+
+
+class CollectionFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Collection
+
+    title = factory.Sequence(lambda n: f"Collection {n}")
+    featured_product = factory.SubFactory(ProductFactory)

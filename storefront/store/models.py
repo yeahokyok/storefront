@@ -9,6 +9,19 @@ class Promotion(models.Model):
     discount = models.DecimalField(max_digits=6, decimal_places=2)
 
 
+class Collection(models.Model):
+    title = models.CharField(max_length=255)
+
+    # If you’d prefer Django not to create a backwards relation,
+    # set related_name to '+' or end it with '+'
+    featured_product = models.ForeignKey(
+        "Product", on_delete=models.SET_NULL, null=True, related_name="+"
+    )
+
+    def __str__(self):
+        return self.title
+
+
 class Product(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
