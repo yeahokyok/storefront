@@ -316,7 +316,7 @@ Session.vim
 .netrwhist
 
 ### Project template
-everycheese/media/
+storefront/media/
 
 .pytest_cache/
 
@@ -324,3 +324,5 @@ everycheese/media/
 *.db
 *.sqlite
 *.sqlite3
+
+.vscode/
