@@ -1,6 +1,6 @@
 import factory
 
-from ..models import Product, Promotion, Collection, Customer
+from ..models import Product, Promotion, Collection, Customer, Order
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -39,3 +39,12 @@ class CustomerFactory(factory.django.DjangoModelFactory):
     email = factory.Faker("email")
     phone = factory.Faker("phone_number")
     membership = factory.Faker("random_element", elements=("B", "S", "G"))
+
+
+class OrderFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Order
+
+    customer = factory.SubFactory(CustomerFactory)
+    placed_at = factory.Faker("date_time_this_year")
+    payment_status = factory.Faker("random_element", elements=("P", "C", "F"))

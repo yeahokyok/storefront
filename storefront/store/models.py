@@ -48,3 +48,21 @@ class Customer(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+
+class Order(models.Model):
+    PAYMENT_STATUS_CHOICES = (
+        ("P", "Pending"),
+        ("C", "Completed"),
+        ("F", "Failed"),
+    )
+    customer = models.ForeignKey(
+        Customer, on_delete=models.PROTECT, related_name="orders"
+    )
+    placed_at = models.DateTimeField(auto_now_add=True)
+    payment_status = models.CharField(
+        max_length=1, choices=PAYMENT_STATUS_CHOICES, default="P"
+    )
+
+    def __str__(self):
+        return f"Order {self.id} for {self.customer}"
