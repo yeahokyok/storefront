@@ -1,6 +1,6 @@
 import factory
 
-from ..models import Product, Promotion, Collection, Customer, Order, OrderItem
+from ..models import Product, Promotion, Collection, Customer, Order, OrderItem, Address
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -60,3 +60,12 @@ class OrderItemFactory(factory.django.DjangoModelFactory):
     unit_price = factory.Faker(
         "pydecimal", left_digits=2, right_digits=2, positive=True
     )
+
+
+class AddressFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Address
+
+    customer = factory.SubFactory(CustomerFactory)
+    street = factory.Faker("street_address")
+    city = factory.Faker("city")

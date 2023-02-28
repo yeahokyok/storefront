@@ -76,3 +76,14 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} of {self.product}"
+
+
+class Address(models.Model):
+    customer = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="addresses"
+    )
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.street}, {self.city} of {self.customer}"
