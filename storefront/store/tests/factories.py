@@ -1,6 +1,6 @@
 import factory
 
-from ..models import Product, Promotion, Collection
+from ..models import Product, Promotion, Collection, Customer
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -28,3 +28,14 @@ class CollectionFactory(factory.django.DjangoModelFactory):
 
     title = factory.Sequence(lambda n: f"Collection {n}")
     featured_product = factory.SubFactory(ProductFactory)
+
+
+class CustomerFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Customer
+
+    first_name = factory.Faker("first_name")
+    last_name = factory.Faker("last_name")
+    email = factory.Faker("email")
+    phone = factory.Faker("phone_number")
+    membership = factory.Faker("random_element", elements=("B", "S", "G"))

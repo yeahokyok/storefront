@@ -34,3 +34,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Customer(models.Model):
+
+    MEMBERSHIP_CHOICES = (("B", "Bronze"), ("S", "Silver"), ("G", "Gold"))
+
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255, unique=True)
+    phone = models.CharField(max_length=255)
+    membership = models.CharField(max_length=1, choices=MEMBERSHIP_CHOICES, default="B")
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
